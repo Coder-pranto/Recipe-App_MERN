@@ -1,16 +1,21 @@
 const express = require('express');
+const app = express();
 const connectDatabase = require('./databaseConfig');
 const colors = require('colors');
 const morgan = require('morgan');
-const app = express();
+const cors = require("cors");
+
+const router = require("./routes/route");
+
 const port = 5000;
 
 
-
-
+app.use(cors());
+app.use(morgan('tiny'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(morgan('tiny'));
+
+app.use("/auth", router);
 
 //default
 app.get('/', (req, res) => {
@@ -32,6 +37,6 @@ app.use((err,req,res,next)=>{
 
 
 app.listen(port, () => {
-  console.log(`> Server is up and running on : http://localhost: ${port} `.green.bgWhite);
+  console.log(`> Server is up and running on : http://localhost:${port} `.green.bgWhite);
   connectDatabase();
 });
