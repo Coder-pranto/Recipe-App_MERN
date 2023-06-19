@@ -1,10 +1,27 @@
 import React from 'react'
 
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+
+import Header from "./layout/navBar";
+import Home from "./pages/home";
+import SavedRecipe from "./pages/savedRecipe";
+import CreateRecipe from "./pages/createRecipe";
+import Auth from "./pages/auth";
+
+
 const App = () => {
   return (
     <>
-      <h2>App</h2>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora, nemo quo vero neque hic alias perferendis ea animi maxime totam corrupti voluptates recusandae, dolor incidunt illum cupiditate similique. Autem dolor minus sit ducimus nam itaque rerum assumenda sequi ullam odit perferendis earum sunt soluta omnis vitae obcaecati repudiandae consequatur asperiores, maiores libero, molestiae vero similique natus. Necessitatibus, pariatur beatae voluptatem est repudiandae reiciendis suscipit, delectus enim totam, nostrum illo temporibus ipsum asperiores exercitationem! Dignissimos explicabo eveniet aliquam molestias minus deserunt vero, fugit, aspernatur placeat fugiat accusantium blanditiis? Fuga quibusdam dolore voluptas inventore magni blanditiis provident asperiores dolorem neque nobis ab tempore esse veritatis facilis quisquam repellendus, nihil illum necessitatibus tempora quidem. Nostrum dolor voluptatem accusamus consequatur adipisci cupiditate earum id voluptates dolorum sed deserunt necessitatibus dolore nulla dicta doloribus illum cum consequuntur a provident, architecto iusto. Molestiae voluptates ipsum incidunt fugit non corporis, in ducimus? Laudantium asperiores quam illum maxime optio perspiciatis id distinctio, impedit culpa voluptates quisquam porro assumenda, vel hic a mollitia facilis consequuntur esse consectetur dolorum neque enim? Exercitationem laborum eius, ex, quibusdam mollitia impedit corrupti accusantium architecto odio a, numquam ut saepe ab ipsam odit. Ipsum a, dolore aut dolorum assumenda perferendis sed tenetur et laborum. Est adipisci quidem veniam soluta, voluptatibus voluptate molestiae molestias quos a ratione optio autem vitae. Quaerat molestiae ipsam, repellendus consequatur reiciendis adipisci nostrum aspernatur minima ut commodi, soluta tenetur autem, architecto sapiente debitis. Architecto mollitia velit dolor necessitatibus nulla. Quod rerum enim animi culpa voluptatem beatae incidunt eveniet illo, ex similique veritatis aliquid natus omnis? Suscipit culpa inventore quae debitis illo ad minima porro blanditiis eum ipsum vero voluptatum natus quam similique, sequi distinctio ratione aspernatur voluptate itaque tempora labore? Magni dolor vitae neque nemo optio inventore expedita nihil, nam quo rerum voluptatem, enim sed ab voluptatibus incidunt corrupti repellat rem hic, cumque tenetur eveniet reprehenderit qui. Aperiam pariatur quasi enim laborum, magni animi, perferendis ab unde nihil veritatis hic possimus incidunt ducimus aspernatur ipsam itaque omnis consectetur ut accusamus, soluta rerum illo similique ea commodi. Rem et dolore temporibus, eos iusto quis consequatur ab ea! Voluptatem earum enim quam iste asperiores excepturi magni vitae! Iure ut magnam ipsum facilis consequatur, officiis labore, fugit ea, hic ipsa vero quia sunt inventore laboriosam esse aut corrupti enim sint dolorem ducimus officia iusto id ipsam eum. Reiciendis mollitia culpa magnam enim repellat accusantium minus architecto sint cumque assumenda, error illum. Dolorum, velit?</p>
+      <BrowserRouter>
+      <Header/>
+      <Routes>
+        <Route path="/home" element={<Home/>} />
+        <Route path="/auth" element={<Auth/>} />
+        <Route path="/create-recipe" element={<CreateRecipe/>} />
+        <Route path="/saved-recipe" element={<SavedRecipe/>} />
+      </Routes>
+      </BrowserRouter>
+
     </>
   )
 }
