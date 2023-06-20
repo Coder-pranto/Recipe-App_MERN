@@ -18,7 +18,7 @@ const createRecipes = async (req,res) => {
       
     try {
         const response = await newRecipe.save();
-        res.json(response);
+        res.status(201).json(response);
     } catch (err) {
         res.json(err);
     }
