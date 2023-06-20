@@ -5,7 +5,8 @@ const colors = require('colors');
 const morgan = require('morgan');
 const cors = require("cors");
 
-const router = require("./routes/route");
+const UserRouter = require("./routes/user.route");
+const RecipesRouter = require("./routes/recipes.route");
 
 const port = 5000;
 
@@ -15,7 +16,8 @@ app.use(morgan('tiny'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use("/auth", router);
+app.use("/auth", UserRouter);
+app.use("/recipes",RecipesRouter);
 
 //default
 app.get('/', (req, res) => {
