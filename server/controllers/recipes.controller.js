@@ -20,7 +20,7 @@ const createRecipes = async (req,res) => {
         const response = await newRecipe.save();
         res.status(201).json(response);
     } catch (err) {
-        res.json(err);
+      res.status(500).json(err);
     }
 }
 
@@ -36,4 +36,47 @@ const savedRecipesx = async (req, res) => {
   }
 };
 
-module.exports = {getRecipes, createRecipes, savedRecipesx};
+
+// Get user's saved recipe by userId
+const getRecipeByID = async (req, res) => {
+  try {
+    const user = await UserModel.findById(req.params.userId);
+    res.status(201).json({ savedRecipes: user?.savedRecipes });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+};
+
+// Get saved recipes
+const  getSavedRecipes =  async (req, res) => {
+  try {
+    const user = await UserModel.findById(req.params.userId);
+    const savedRecipes = await RecipesModel.find({
+      _id: { $in: user.savedRecipes },
+    });
+
+    console.log(savedRecipes);
+    res.status(201).json({ savedRecipes });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+};
+
+module.exports = {getRecipes, createRecipes, savedRecipesx, getRecipeByID,  getSavedRecipes};
+
+
+
+
+/* In the code snippet user?.savedRecipes, the ?. is known as the "Optional Chaining" operator in JavaScript. It is used to access properties of an object in a safe manner, especially when the object may be nullish or undefined.
+
+Here's how it works:
+
+    If the user object is defined and not nullish (null or undefined), the expression user?.savedRecipes will evaluate to the value of the savedRecipes property of the user object.
+
+    If the user object is nullish or undefined, the expression user?.savedRecipes will short-circuit and evaluate to undefined. This prevents any potential errors that would occur if you attempted to access a property of a nullish or undefined object directly.
+
+In the given code snippet, the intention is to return the savedRecipes property of the user object if it exists. If the user object is nullish or undefined, the expression will evaluate to undefined, which will be passed as the value of the savedRecipes property in the response object.
+
+Overall, the ?. operator ensures that the code does not throw an error when accessing properties of an object that may be nullish or undefined, providing a more robust and safe way to access nested properties. */
