@@ -3,28 +3,32 @@ const RecipesModel = require("../models/recipes.model");
 const UserModel = require("../models/user.model");
 
 
-const getRecipes = async (req,res) => {
-    try {
-        const result = await RecipesModel.find({});
-        res.status(200).json(result);
-    } catch (err) {
-        res.status(500).json(err);
-    }
-}
+//Done
+const getRecipes = async (req, res) => {
+  try {
+    const result = await RecipesModel.find({});
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
 
-const createRecipes = async (req,res) => {
-    const newRecipe = new RecipesModel(req.body);
-      console.log(newRecipe);
-      
-    try {
-        const response = await newRecipe.save();
-        res.status(201).json(response);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-}
 
-const savedRecipesx = async (req, res) => {
+//Done
+const createRecipes = async (req, res) => {
+  const newRecipe = new RecipesModel(req.body);
+  console.log(newRecipe);
+  try {
+    const response = await newRecipe.save();
+    res.status(201).json(response);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+
+//Done
+const saveUserRecipe = async (req, res) => {
   try {
     const recipe = await RecipesModel.findById(req.body.recipeID);
     const user = await UserModel.findById(req.body.userID);
@@ -37,34 +41,31 @@ const savedRecipesx = async (req, res) => {
 };
 
 
-// Get user's saved recipe by userId
+// Get user's saved recipe by userId (done)
 const getRecipeByID = async (req, res) => {
   try {
     const user = await UserModel.findById(req.params.userId);
     res.status(201).json({ savedRecipes: user?.savedRecipes });
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 };
 
 // Get saved recipes
-const  getSavedRecipes =  async (req, res) => {
+const getSavedRecipes = async (req, res) => {
   try {
     const user = await UserModel.findById(req.params.userId);
     const savedRecipes = await RecipesModel.find({
       _id: { $in: user.savedRecipes },
     });
-
     console.log(savedRecipes);
     res.status(201).json({ savedRecipes });
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 };
 
-module.exports = {getRecipes, createRecipes, savedRecipesx, getRecipeByID,  getSavedRecipes};
+module.exports = {getRecipes, createRecipes, saveUserRecipe, getRecipeByID,  getSavedRecipes};
 
 
 

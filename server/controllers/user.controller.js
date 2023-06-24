@@ -38,4 +38,18 @@ const loginUser = async(req, res) => {
 
 }
 
-module.exports = {registerUser,loginUser};
+ const verifyToken = (req, res, next) => {
+   const authHeader = req.headers.authorization;
+   if (authHeader) {
+     jwt.verify(authHeader, 'privatekey', (err) => {
+       if (err) {
+         return res.sendStatus(403);
+       }
+       next();
+     });
+   } else {
+     res.sendStatus(401);
+   }
+ };
+
+module.exports = {registerUser,loginUser, verifyToken};

@@ -35,7 +35,7 @@ const Header = () => {
               <NavLink className="nav-link" to="/create-recipe" >Create-Recipe</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/saved-recipe">Saved-Recipe</NavLink>
+              {cookies.access_token? (<NavLink className="nav-link" to="/saved-recipe">Saved-Recipe</NavLink>):""}
             </li>
             <li className="nav-item">
               {!cookies.access_token? (<NavLink className="nav-link" to="/auth">Register/Login</NavLink>):(<NavLink onClick={logout} className="nav-link" >Logout</NavLink>)}
